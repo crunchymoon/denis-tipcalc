@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>tip me</title>
+    <link rel="stylesheet" href="puzzle.css">
+</head>
+
+<body>
+    <section class="tipper">
+        <div class="tipper__bg">
+            <div class="tipper__sides left">
+                <div class="tipper__bill">
+                    <h2>Bill</h2>
+                    <label class="tipper__bill-cont">
+                        <span>$</span>
+                    </label>
+                    <input value="0" class="tipper__bill-inp" type="text">
+                </div>
+                <div class="tipper__select">
+                    <h2>Select Tip %</h2>
+                    <ul class="tipper__percents">
+                        <li class="tipper__percval"><a href="#">5%</a></li>
+                        <li class="tipper__percval"><a href="#">10%</a></li>
+                        <li class="tipper__percval"><a href="#">15%</a></li>
+                        <li class="tipper__percval"><a href="#">25%</a></li>
+                        <li class="tipper__percval"><a href="#">50%</a></li>
+                        <li class="tipper__percval custom"><input placeholder="custom" type="text"></li>
+                    </ul>
+                </div>
+                <button class="add"> Add tip </button>
+            </div>
+            <div class="tipper__sides right">
+                <div class="tipper__amounts">
+                    <div class="tipper__amount tip">
+                        <h2>Tip Amount</h2>
+                        <span>$0.00</span>
+                    </div>
+                    <div class="tipper__amount total">
+                        <h2>Total</h2>
+                        <span>$0.00</span>
+                    </div>
+                </div>
+                <button class="reset">Reset</button>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript" src="puzzle.js"></script>
+</body>
+
+</html>
