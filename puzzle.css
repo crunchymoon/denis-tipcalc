@@ -101,6 +101,12 @@ h2 {
     width: 100%;
 }
 
+.tipper__warning{
+    color: darkorange;
+    background-color:beige;
+    display: none;
+}
+
 .tipper__percents {
     display: flex;
     flex-wrap: wrap;
@@ -134,7 +140,8 @@ h2 {
     font-size: 15px;
     width: 50px;
 }
-.add{
+
+.add {
     margin-top: 2em;
     width: 100%;
     border-radius: 10px;
