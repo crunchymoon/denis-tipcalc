@@ -1,9 +1,11 @@
 /*https://www.frontendmentor.io/solutions/responsive-tip-calculator-website-using-css-grid-and-flexbox-x_mBL2hXz*/
 let addTip = document.querySelector('.add');
-addTip.addEventListener('click', calculate, {
-    once: true
-});
+addTip.addEventListener('click', calculate);
 addTip.disabled = true;
+
+let resetAll = document.querySelector('.reset');
+resetAll.addEventListener('click', resetValues);
+
 let percentTip;
 
 //get the tip values
@@ -18,9 +20,9 @@ tips.forEach(tip => {
             //getting the custom value
             let customVal = e.target.hasAttribute('placeholder');
             if (customVal) {
-                e.target.addEventListener('change',(e)=>{
-                    let customValInt=parseInt(e.target.value);
-                    percentTip=customValInt;
+                e.target.addEventListener('change', (e) => {
+                    let customValInt = parseInt(e.target.value);
+                    percentTip = customValInt;
                 })
             }
             //getting the other elements target value
@@ -56,11 +58,13 @@ function totalAmount(tip) {
     return totalAmountValue.innerHTML = `$${tip}.00`;
 }
 
-// if bill input is not a number, "gimme ONLY NUMBAAS!"...DONE
-//if both values < 0 , add tip button enable, else text...DONE
-//custom make work xd...DONE
-
-
+function resetValues() {
+    let bili = document.querySelector('.tipper__bill-inp');
+    bili.value="";
+    tipAmount(0);
+    totalAmount(0);
+    addTip.disabled = true;
+}
 
 //tip amount, total: regex: after the dec number write the rest
-//reset button make work
+//reset button make work ... DONE
