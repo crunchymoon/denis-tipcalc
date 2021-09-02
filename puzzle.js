@@ -6,6 +6,8 @@ addTip.disabled = true;
 let resetAll = document.querySelector('.reset');
 resetAll.addEventListener('click', resetValues);
 
+let warningSign = document.querySelector('.tipper__warning');
+
 let percentTip;
 
 //get the tip values
@@ -14,21 +16,30 @@ tips.forEach(tip => {
     tip.addEventListener('click', (e) => {
         //before the select tip is clicked the user must give a bill amount that is > 0 and that is a numerical value!
         if (getBill() == 0 || getBill() < 0 || isNaN(getBill())) {
-            let warningSign = document.querySelector('.tipper__warning');
             warningSign.style.display = "block";
         } else {
             //getting the custom value
             let customVal = e.target.hasAttribute('placeholder');
             if (customVal) {
+                addTip.disabled = true;
                 e.target.addEventListener('change', (e) => {
+                    addTip.disabled = false;
                     let customValInt = parseInt(e.target.value);
-                    percentTip = customValInt;
+                    if (customValInt > 0) {
+                        percentTip = customValInt;
+                    } else {
+                        let customValWarning = document.querySelector('.tipper__percval-warning');
+                        customValWarning.style.display = "block";
+                        addTip.disabled = true;
+                    }
+
                 })
+            } else {
+                //getting the other elements target value
+                let one = parseInt(e.target.innerText);
+                percentTip = one;
+                addTip.disabled = false;
             }
-            //getting the other elements target value
-            let one = parseInt(e.target.innerText);
-            percentTip = one;
-            addTip.disabled = false;
         }
 
     })
@@ -38,7 +49,12 @@ tips.forEach(tip => {
 function calculate() {
     let billAmount = getBill();
     let totalValue = totalAmount(+billAmount + (+billAmount * (percentTip / 100)));
-    let tipValue = tipAmount(+billAmount * (percentTip / 100));
+    //calculate the tipvalue
+    let tipValue = +billAmount * (percentTip / 100);
+    //run a regex test: at least 1 digit, then the . then max 2 digit caharcters , then join() to a string because the value is an array by default.
+    let reg = /^\d+\.*\d{0,2}/gm
+    let tipAmountHtml = tipAmount(String(tipValue).match(reg).join(''));
+    
 }
 
 //bill amount:
@@ -50,21 +66,18 @@ function getBill() {
 
 function tipAmount(tipp) {
     let tipAmountValue = document.querySelector('.tip span');
-    return tipAmountValue.innerHTML = `$${tipp}.00`;
+    return tipAmountValue.innerHTML = `$${tipp}`;
 }
 
 function totalAmount(tip) {
     let totalAmountValue = document.querySelector('.total span');
-    return totalAmountValue.innerHTML = `$${tip}.00`;
+    return totalAmountValue.innerHTML = `$${tip}`;
 }
 
 function resetValues() {
     let bili = document.querySelector('.tipper__bill-inp');
-    bili.value="";
-    tipAmount(0);
-    totalAmount(0);
+    bili.value = "";
+    tipAmount("0.00");
+    totalAmount("0.00");
     addTip.disabled = true;
 }
-
-//tip amount, total: regex: after the dec number write the rest
-//reset button make work ... DONE
