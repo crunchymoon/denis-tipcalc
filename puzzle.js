@@ -8,6 +8,8 @@ resetAll.addEventListener('click', resetValues);
 
 let warningSign = document.querySelector('.tipper__warning');
 
+let customValWarning = document.querySelector('.tipper__percval-warning');
+
 let percentTip;
 
 //get the tip values
@@ -28,7 +30,6 @@ tips.forEach(tip => {
                     if (customValInt > 0) {
                         percentTip = customValInt;
                     } else {
-                        let customValWarning = document.querySelector('.tipper__percval-warning');
                         customValWarning.style.display = "block";
                         addTip.disabled = true;
                     }
@@ -55,7 +56,7 @@ function calculate() {
     let reg = /^\d+\.*\d{0,2}/gm
     let tipAmountHtml = tipAmount(String(tipValue).match(reg).join(''));
     let totalAmountHtml = totalAmount(String(totalValue).match(reg).join(''))
-    
+
 }
 
 //bill amount:
@@ -81,4 +82,6 @@ function resetValues() {
     tipAmount("0.00");
     totalAmount("0.00");
     addTip.disabled = true;
+    warningSign.style.display = "none";
+    customValWarning.style.display = "none";
 }

@@ -72,6 +72,9 @@ h2 {
 }
 
 .left {
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-end;
     font-size: 25px;
     color: hsl(186, 14%, 43%);
     padding-right: 3%;
