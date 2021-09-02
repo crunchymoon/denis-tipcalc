@@ -48,12 +48,13 @@ tips.forEach(tip => {
 //calculate total bill + percentage
 function calculate() {
     let billAmount = getBill();
-    let totalValue = totalAmount(+billAmount + (+billAmount * (percentTip / 100)));
+    let totalValue = +billAmount + (+billAmount * (percentTip / 100));
     //calculate the tipvalue
     let tipValue = +billAmount * (percentTip / 100);
     //run a regex test: at least 1 digit, then the . then max 2 digit caharcters , then join() to a string because the value is an array by default.
     let reg = /^\d+\.*\d{0,2}/gm
     let tipAmountHtml = tipAmount(String(tipValue).match(reg).join(''));
+    let totalAmountHtml = totalAmount(String(totalValue).match(reg).join(''))
     
 }
 
